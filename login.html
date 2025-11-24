@@ -102,25 +102,21 @@ function login() {
 
     let savedPass = localStorage.getItem(user);
 
-    if (savedPass === null) {
-        alert("Tài khoản không tồn tại!");
-        return;
-    }
+    if (savedPass === null) { alert("Tài khoản không tồn tại!"); return; }
+    if (savedPass !== pass) { alert("Sai mật khẩu!"); return; }
 
-    if (savedPass !== pass) {
-        alert("Sai mật khẩu!");
-        return;
-    }
+    // Đánh dấu đã đăng nhập
+    localStorage.setItem("isLoggedIn", "true");
 
     alert("Đăng nhập thành công!");
-
-    // Chuyển sang trang sản phẩm
-    window.location.href = "shop.html";
+    window.location.href = "shop.html"; // chuyển sang shop
 }
+
 </script>
 
 </body>
 </html>
+
 
 
 
