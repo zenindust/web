@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Đăng nhập</title>
+    <title>Đăng nhập / Đăng ký</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,35 +38,83 @@
             cursor: pointer;
         }
         button:hover { background: #0d57c6; }
-        .link {
+        .switch {
             text-align: center;
             margin-top: 10px;
-            display: block;
+            cursor: pointer;
             color:#004ba8;
         }
     </style>
 </head>
 <body>
 
-<div class="form-box">
+<!-- LOGIN -->
+<div id="loginBox" class="form-box">
     <h2>Đăng nhập</h2>
-
     <input type="text" id="loginUser" placeholder="Tên đăng nhập">
     <input type="password" id="loginPass" placeholder="Mật khẩu">
-
     <button onclick="login()">Đăng nhập</button>
 
-    <a href="signup.html" class="link">Chưa có tài khoản? Đăng ký</a>
+    <div class="switch" onclick="showRegister()">Chưa có tài khoản? Đăng ký</div>
+</div>
+
+<!-- REGISTER -->
+<div id="registerBox" class="form-box" style="display:none;">
+    <h2>Đăng ký</h2>
+    <input type="text" id="regUser" placeholder="Tên đăng nhập">
+    <input type="password" id="regPass" placeholder="Mật khẩu">
+    <input type="password" id="regPass2" placeholder="Nhập lại mật khẩu">
+    <button onclick="register()">Tạo tài khoản</button>
+
+    <div class="switch" onclick="showLogin()">Đã có tài khoản? Đăng nhập</div>
 </div>
 
 <script>
+function showRegister() {
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("registerBox").style.display = "block";
+}
+function showLogin() {
+    document.getElementById("registerBox").style.display = "none";
+    document.getElementById("loginBox").style.display = "block";
+}
+
+// ===== ĐĂNG KÝ =====
+function register() {
+    let user = document.getElementById("regUser").value;
+    let pass = document.getElementById("regPass").value;
+    let pass2 = document.getElementById("regPass2").value;
+
+    if (user.trim() === "" || pass.trim() === "") {
+        alert("Không được để trống!");
+        return;
+    }
+
+    if (pass !== pass2) {
+        alert("Mật khẩu không khớp!");
+        return;
+    }
+
+    if (localStorage.getItem("acc_" + user)) {
+        alert("Tên đăng nhập đã tồn tại!");
+        return;
+    }
+
+    // Lưu tài khoản
+    localStorage.setItem("acc_" + user, pass);
+
+    alert("Đăng ký thành công!");
+    showLogin();
+}
+
+// ===== ĐĂNG NHẬP =====
 function login() {
     let user = document.getElementById("loginUser").value;
     let pass = document.getElementById("loginPass").value;
 
     let savedPass = localStorage.getItem("acc_" + user);
 
-    if (!savedPass) {
+    if (savedPass === null) {
         alert("Tài khoản không tồn tại!");
         return;
     }
@@ -76,14 +124,18 @@ function login() {
         return;
     }
 
+    alert("Đăng nhập thành công!");
+
+    // Lưu username để hiển thị ở web.html
     localStorage.setItem("username", user);
 
-    alert("Đăng nhập thành công!");
+    // Chuyển sang trang web
     window.location.href = "web.html";
 }
 </script>
 
 </body>
 </html>
+
 
 
