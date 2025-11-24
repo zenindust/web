@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng ký tài khoản</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #e3f1ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-box {
+            background: #cfe8ff;
+            padding: 25px;
+            border-radius: 12px;
+            width: 320px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.2);
+        }
+        h2 { text-align: center; }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #aaa;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover { background: #0d57c6; }
+        .link {
+            text-align: center;
+            margin-top: 10px;
+            display: block;
+            color: #004ba8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-box">
+    <h2>Tạo tài khoản</h2>
+
+    <input type="text" id="regUser" placeholder="Tên đăng nhập">
+    <input type="password" id="regPass" placeholder="Mật khẩu">
+    <input type="password" id="regPass2" placeholder="Nhập lại mật khẩu">
+
+    <button onclick="signup()">Đăng ký</button>
+
+    <a href="login.html" class="link">Đã có tài khoản? Đăng nhập</a>
+</div>
+
+<script>
+function signup() {
+    let user = document.getElementById("regUser").value.trim();
+    let pass = document.getElementById("regPass").value;
+    let pass2 = document.getElementById("regPass2").value;
+
+    if (!user || !pass) {
+        alert("Không được để trống!");
+        return;
+    }
+
+    if (pass !== pass2) {
+        alert("Mật khẩu không khớp!");
+        return;
+    }
+
+    if (localStorage.getItem("acc_" + user)) {
+        alert("Tên đăng nhập đã tồn tại!");
+        return;
+    }
+
+    localStorage.setItem("acc_" + user, pass);
+
+    alert("Đăng ký thành công!");
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
+
