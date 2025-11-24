@@ -1,22 +1,117 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<title>QUOC HUNG AUDIO</title>
-<style>
-    body { font-family: Arial; display:flex; justify-content:center; align-items:center; height:100vh; margin:0; background:#e0e3ea; }
-    .btn { padding:20px 40px; font-size:1.2em; background:#1a73e8; color:white; border:none; border-radius:8px; cursor:pointer; }
-    .btn:hover { background:#0d57c6; }
-</style>
+    <meta charset="UTF-8">
+    <title>Đăng nhập / Đăng ký</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #e3f1ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-box {
+            background: #cfe8ff;
+            padding: 25px;
+            border-radius: 12px;
+            width: 320px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.2);
+        }
+        h2 { text-align: center; }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #aaa;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover { background: #0d57c6; }
+        .switch { text-align: center; margin-top: 10px; cursor: pointer; color:#004ba8; }
+    </style>
 </head>
 <body>
 
-<button class="btn" onclick="goLogin()">Bắt đầu</button>
+<!-- LOGIN -->
+<div id="loginBox" class="form-box">
+    <h2>Đăng nhập</h2>
+    <input type="text" id="loginUser" placeholder="Tên đăng nhập">
+    <input type="password" id="loginPass" placeholder="Mật khẩu">
+    <button onclick="login()">Đăng nhập</button>
+
+    <div class="switch" onclick="showRegister()">Chưa có tài khoản? Đăng ký</div>
+</div>
+
+<!-- REGISTER -->
+<div id="registerBox" class="form-box" style="display:none;">
+    <h2>Đăng ký</h2>
+    <input type="text" id="regUser" placeholder="Tên đăng nhập">
+    <input type="password" id="regPass" placeholder="Mật khẩu">
+    <input type="password" id="regPass2" placeholder="Nhập lại mật khẩu">
+    <button onclick="register()">Tạo tài khoản</button>
+
+    <div class="switch" onclick="showLogin()">Đã có tài khoản? Đăng nhập</div>
+</div>
 
 <script>
-function goLogin() {
-    window.location.href = "src/login.html";
+function showRegister() {
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("registerBox").style.display = "block";
 }
+function showLogin() {
+    document.getElementById("registerBox").style.display = "none";
+    document.getElementById("loginBox").style.display = "block";
+}
+
+// ===== ĐĂNG KÝ =====
+function register() {
+    let user = document.getElementById("regUser").value;
+    let pass = document.getElementById("regPass").value;
+    let pass2 = document.getElementById("regPass2").value;
+
+    if (pass !== pass2) {
+        alert("Mật khẩu không khớp!");
+        return;
+    }
+
+    if (localStorage.getItem(user)) {
+        alert("Tên đăng nhập đã tồn tại!");
+        return;
+    }
+
+    localStorage.setItem(user, pass);
+    alert("Đăng ký thành công! Hãy đăng nhập.");
+    showLogin();
+}
+
+// ===== ĐĂNG NHẬP =====
+function login() {
+    let user = document.getElementById("loginUser").value;
+    let pass = document.getElementById("loginPass").value;
+
+    let savedPass = localStorage.getItem(user);
+
+    if (savedPass === null) { alert("Tài khoản không tồn tại!"); return; }
+    if (savedPass !== pass) { alert("Sai mật khẩu!"); return; }
+
+    // Đánh dấu đã đăng nhập
+    localStorage.setItem("isLoggedIn", "true");
+
+    alert("Đăng nhập thành công!");
+    window.location.href = "shop.html"; // chuyển sang shop
+}
+
 </script>
 
 </body>
