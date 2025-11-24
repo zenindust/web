@@ -11,10 +11,7 @@
             margin: 0;
             padding: 0;
         }
-        .container {
-            width: 90%;
-            margin: 0 auto;
-        }
+        .container { width: 90%; margin: 0 auto; }
         header {
             font-family: Arial, sans-serif;
             background-image: url('BeautyPlus-image-extender (1).jpeg'); 
@@ -24,9 +21,21 @@
             background-position: center center; 
             background-repeat: no-repeat;
             background-size: auto;
-            
-           
+            position: relative;
         }
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .logout-btn:hover { background: #c0392b; }
+
         .product {
             display: flex;
             flex-wrap: wrap;
@@ -43,28 +52,11 @@
             text-align: center;
             transition: transform 0.3s ease;
         }
-        .product-item:hover {
-            transform: scale(1.05);
-        }
-        .product-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-        .product-item h3 {
-            margin-top: 10px;
-            font-size: 1.2em;
-            color: #333;
-        }
-        .product-item p {
-            font-size: 1em;
-            color: #666;
-        }
-        .product-item .price {
-            font-size: 1.5em;
-            color: #e74c3c;
-            margin: 10px 0;
-        }
+        .product-item:hover { transform: scale(1.05); }
+        .product-item img { width: 100%; height: auto; border-radius: 8px; }
+        .product-item h3 { margin-top: 10px; font-size: 1.2em; color: #333; }
+        .product-item p { font-size: 1em; color: #666; }
+        .product-item .price { font-size: 1.5em; color: #e74c3c; margin: 10px 0; }
         .product-item .buy-button {
             background-color: #28a745;
             color: white;
@@ -75,36 +67,31 @@
             font-size: 1em;
             transition: background-color 0.3s;
         }
-        .product-item .buy-button:hover {
-            background-color: #218838;
-        }
+        .product-item .buy-button:hover { background-color: #218838; }
     </style>
 </head>
 <body>
 
-
 <header>
-
+    <button class="logout-btn" onclick="logout()">Đăng xuất</button>
 </header>
 
 <div class="container">
     <div class="product">
         <div class="product-item">
-            <img src="399980137_1512269006199698_1652515574426430695_n.jpg " alt="Sản phẩm 1">
+            <img src="399980137_1512269006199698_1652515574426430695_n.jpg" alt="Sản phẩm 1">
             <h3>1 Cặp Loa Hỏa Tiễn K212N & 1 Main 2 Kênh MX-3800S</h3>
             <p>Bộ đôi hoàn hảo mang đến cho người nghe bắt tai và cuốn hút</p>
             <div class="price">45,300,000 VND</div>
             <button class="buy-button">Buy Now</button>
         </div>
-
         <div class="product-item">
             <img src="399590479_1512269029533029_4645542348418295775_n.jpg" alt="Sản phẩm 2">
             <h3>1 Cặp Loa Hỏa Tiễn K212N & 1 Cặp Case</h3>
-            <p> Với công suất lên đến 800W, âm thanh mạnh mẽ, thích hợp cho các dàn âm thanh chuyên nghiệp và sự kiện lớn. Được thiết kế với loa bass 12 inch và loa treble 1.5 inch, mang đến âm thanh rõ ràng và sắc nét.</p>
+            <p>Công suất lên đến 800W, âm thanh mạnh mẽ, thích hợp cho sự kiện lớn.</p>
             <div class="price">36,800,000 VND</div>
             <button class="buy-button">Buy Now</button>
         </div>
-
         <div class="product-item">
             <img src="399385644_1512269049533027_7518393642864294731_n.jpg" alt="Sản phẩm 3">
             <h3>1 Cặp Loa Hỏa Tiễn K212N & 1 Cặp Loa SUB X218D</h3>
@@ -112,18 +99,33 @@
             <div class="price">79,800,000 VND</div>
             <button class="buy-button">Buy Now</button>
         </div>
-
         <div class="product-item">
             <img src="453246921_1664242717668992_2660138402851727164_n.jpg" alt="Sản phẩm 4">
             <h3>Loa Bass Sub PA18FX-29</h3>
-            <p> Bass Sub mang lại người nghe rõ từng nhịp đập với công suất vô cùng mạnh mẽ.</p>
+            <p>Bass Sub mang lại người nghe rõ từng nhịp đập với công suất mạnh mẽ.</p>
             <div class="price">36,800,000 VND</div>
             <button class="buy-button">Buy Now</button>
-        
+        </div>
     </div>
 </div>
-</body>
 
+<script>
+// ===== Kiểm tra đăng nhập =====
+if (!localStorage.getItem("isLoggedIn")) {
+    alert("Bạn cần đăng nhập trước!");
+    window.location.href = "login.html";
+}
+
+// ===== Đăng xuất =====
+function logout() {
+    localStorage.removeItem("isLoggedIn");
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
 </html>
+
+
 
 
