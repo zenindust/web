@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng nhập / Đăng ký - Xuân Phước Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #e3f1ff; /* nền xanh dương nhạt tổng thể */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background: #cfe8ff; /* khung xanh nước biển nhạt */
+            padding: 25px;
+            border-radius: 12px;
+            width: 320px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #aaa;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #0d57c6;
+        }
+
+        .option {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .option a {
+            color: #004ba8;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container" id="loginBox">
+    <h2>Đăng nhập</h2>
+    <form>
+        <input type="text" placeholder="Tên đăng nhập" id="loginUser">
+        <input type="password" placeholder="Mật khẩu" id="loginPass">
+
+        <div class="remember">
+            <input type="checkbox" id="rememberCheck">
+            <label for="rememberCheck">Ghi nhớ tài khoản</label>
+        </div>
+
+        <button type="button">Đăng nhập</button>
+    </form>
+
+    <div class="option">
+        Chưa có tài khoản? <a onclick="showRegister()">Đăng ký</a>
+    </div>
+</div>
+
+
+<!-- FORM ĐĂNG KÝ -->
+<div class="login-container" id="registerBox" style="display:none;">
+    <h2>Đăng ký</h2>
+    <form>
+        <input type="text" placeholder="Tên đăng nhập">
+        <input type="password" placeholder="Mật khẩu">
+        <input type="password" placeholder="Nhập lại mật khẩu">
+        <button type="button">Tạo tài khoản</button>
+    </form>
+
+    <div class="option">
+        Đã có tài khoản? <a onclick="showLogin()">Đăng nhập</a>
+    </div>
+</div>
+
+
+<script>
+    function showRegister() {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("registerBox").style.display = "block";
+    }
+
+    function showLogin() {
+        document.getElementById("registerBox").style.display = "none";
+        document.getElementById("loginBox").style.display = "block";
+    }
+</script>
+
+</body>
+</html>
