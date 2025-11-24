@@ -11,12 +11,31 @@
             margin: 0;
             padding: 0;
         }
+
+        /* Khung hiển thị user */
+        #userBox {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.2);
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .logout-btn {
+            color: red;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
         .container {
             width: 90%;
             margin: 0 auto;
         }
         header {
-            font-family: Arial, sans-serif;
             background-image: url('BeautyPlus-image-extender (1).jpeg'); 
             background-color: #333;
             color: white;
@@ -24,8 +43,6 @@
             background-position: center center; 
             background-repeat: no-repeat;
             background-size: auto;
-            
-           
         }
         .product {
             display: flex;
@@ -82,15 +99,17 @@
 </head>
 <body>
 
+<!-- Hiển thị tên người dùng -->
+<div id="userBox"></div>
 
 <header>
-
 </header>
 
 <div class="container">
     <div class="product">
+
         <div class="product-item">
-            <img src="399980137_1512269006199698_1652515574426430695_n.jpg " alt="Sản phẩm 1">
+            <img src="399980137_1512269006199698_1652515574426430695_n.jpg" alt="Sản phẩm 1">
             <h3>1 Cặp Loa Hỏa Tiễn K212N & 1 Main 2 Kênh MX-3800S</h3>
             <p>Bộ đôi hoàn hảo mang đến cho người nghe bắt tai và cuốn hút</p>
             <div class="price">45,300,000 VND</div>
@@ -100,7 +119,7 @@
         <div class="product-item">
             <img src="399590479_1512269029533029_4645542348418295775_n.jpg" alt="Sản phẩm 2">
             <h3>1 Cặp Loa Hỏa Tiễn K212N & 1 Cặp Case</h3>
-            <p> Với công suất lên đến 800W, âm thanh mạnh mẽ, thích hợp cho các dàn âm thanh chuyên nghiệp và sự kiện lớn. Được thiết kế với loa bass 12 inch và loa treble 1.5 inch, mang đến âm thanh rõ ràng và sắc nét.</p>
+            <p>Âm thanh mạnh mẽ thích hợp cho dàn âm thanh chuyên nghiệp.</p>
             <div class="price">36,800,000 VND</div>
             <button class="buy-button">Buy Now</button>
         </div>
@@ -108,7 +127,7 @@
         <div class="product-item">
             <img src="399385644_1512269049533027_7518393642864294731_n.jpg" alt="Sản phẩm 3">
             <h3>1 Cặp Loa Hỏa Tiễn K212N & 1 Cặp Loa SUB X218D</h3>
-            <p>Bộ đôi kết hợp siêu hoàn hảo chiến mọi loại show lớn.</p>
+            <p>Bộ đôi hoàn hảo chiến mọi show lớn.</p>
             <div class="price">79,800,000 VND</div>
             <button class="buy-button">Buy Now</button>
         </div>
@@ -116,12 +135,34 @@
         <div class="product-item">
             <img src="453246921_1664242717668992_2660138402851727164_n.jpg" alt="Sản phẩm 4">
             <h3>Loa Bass Sub PA18FX-29</h3>
-            <p> Bass Sub mang lại người nghe rõ từng nhịp đập với công suất vô cùng mạnh mẽ.</p>
+            <p>Bass Sub mang lại âm thanh mạnh mẽ và chắc tiếng.</p>
             <div class="price">36,800,000 VND</div>
             <button class="buy-button">Buy Now</button>
-        
+        </div>
+
     </div>
 </div>
-</body>
 
+<script>
+    // Kiểm tra xem user đã đăng nhập chưa
+    let user = localStorage.getItem("username");
+
+    if (!user) {
+        window.location.href = "login.html"; // Nếu chưa login -> quay về login
+    }
+
+    // Hiển thị user trên góc phải
+    document.getElementById("userBox").innerHTML = 
+        "Xin chào, " + user +
+        " <span class='logout-btn' onclick='logout()'>Đăng xuất</span>";
+
+    // Hàm đăng xuất
+    function logout() {
+        localStorage.removeItem("username");
+        window.location.href = "login.html";
+    }
+</script>
+
+</body>
 </html>
+
